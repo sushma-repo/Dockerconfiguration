@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  # MySQL Service
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: Sushu@4997
+      MYSQL_DATABASE: university
+      MYSQL_USER: root
+      MYSQL_PASSWORD: Sushu@4997
+      DATABASE_HOST : localhost
+      DATABASE_PORT : 3306
+    
+
+  # Spring Boot Application Service
+  app:
+    image: sushma/employeedetails:0.0.1
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/university?autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: Sushu@4997
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+   
